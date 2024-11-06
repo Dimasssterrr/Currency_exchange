@@ -1,0 +1,26 @@
+server:
+  port: 8080
+
+spring:
+  liquibase:
+    enabled: true
+    drop-first: false
+    default-schema: public
+    change-log: classpath:db/changelog_init.xml
+
+  datasource:
+    driver-class-name: org.postgresql.Driver
+    url: jdbc:postgresql://localhost:5432/postgres
+    username: postgres
+    password: Dimat12345
+  jpa:
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.PostgreSQL95Dialect
+        show_sql: false
+        hbm2ddl:
+          auto: none
+
+centralBank:
+  url: https://cbr.ru/scripts/XML_daily.asp
+
