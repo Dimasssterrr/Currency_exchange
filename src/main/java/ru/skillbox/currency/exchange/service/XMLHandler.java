@@ -40,14 +40,15 @@ public class XMLHandler extends DefaultHandler {
             currency.setValue(Double.parseDouble(currentValue.toString().replaceAll(",", ".")));
         }
         if(qName.equals("Valute")) {
-            Currency currencyDb = repository.findByIsoLetterCode(currency.getIsoLetterCode());
+            Currency currencyDb = repository.findByIsoNumCode(currency.getIsoNumCode());
             if(currencyDb == null) {
                 repository.save(currency);
                 log.info("Добавлена валюта: " + currency.getName());
             } else {
                 currencyDb.setValue(currency.getValue());
+                currencyDb.setIsoLetterCode(currency.getIsoLetterCode());
                 repository.save(currencyDb);
-                log.info("Обновлена валюта: " + currency.getName());
+                log.info("Обновлена валюта: " + currencyDb.getName());
             }
         }
     }

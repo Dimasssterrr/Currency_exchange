@@ -32,6 +32,9 @@ public class CurrencyService {
     public Double convertValue(Long value, Long numCode) {
         log.info("CurrencyService method convertValue executed");
         Currency currency = repository.findByIsoNumCode(numCode);
+        if(currency == null) {
+            throw new RuntimeException("Currency not found numCode: " + numCode);
+        }
         return value * currency.getValue();
     }
 
